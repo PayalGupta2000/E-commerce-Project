@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Shopping Website</title>
+    <link rel="shortcut icon" href="media/titleico.png" type="image/x-icon">
+    <style>
+        table{
+            float:left;
+        }
+
+        .format{
+            border-style:double;
+            border-color:crimson;
+            text-align: justify;
+            font-style: italic;
+            color:darkcyan;
+            
+
+        }
+
+        .format h2,h4{
+            text-align: center;
+        }
+
+        .format hr{
+            color:crimson;
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <!-- <a href="/desc?id={{product.product_id}}"></a> -->
+    
+    <div class="main">
+    <table>
+        
+        <tr>
+
+   <th>  <img src="{{ desc.product_logo.url }}", height="420px">
+    <a href="/add_cart?id={{ desc.id }}&product={{ desc.product_name }}&price={{desc.product_price}}"><button>Add to Cart</button></a>
+   </th>
+   
+   <th><div class="format"> <h2>{{desc.product_name}}</h2><hr>
+    <h4>Rs. {{desc.product_price}}</h4><hr>
+    <h4>Quantity: {{desc.product_quantity}}</h4><hr>
+    <h3>{{desc.product_description}}</h3>
+    
+    
+    
+
+
+</div></th>
+
+
+    <!-- <a class ="cart" href="/add_cart?product={{ product.product_name }}&price={{product.product_price}}">Add to Cart</a> -->
+        </tr>    
+</table>
+</div>
+</body>
+</html>

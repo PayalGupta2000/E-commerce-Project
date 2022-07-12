@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> A Shopping Website</title> 
+    <link rel="shortcut icon" href="media/titleico.png" type="image/x-icon">
+    
+    <style>
+        .product{
+            width: 23%;
+            height: 300px;
+            background-color:whitesmoke;
+            margin: 4px;
+            padding-left: 12px;
+            padding-top: 8px;
+            border-bottom: white dashed 2px;
+            float: left;
+
+        }
+
+        .product a img{
+            width: 100%;
+            height:98%;
+        }
+        
+        .product a{
+            width: 100%;
+            height:70%;
+        }
+        
+        
+        h2, h4{
+            color:black;
+            
+        }
+
+        a{
+            display: block;
+            margin: 10px;
+            padding:10px;
+            color: black;
+            float: left;
+            background-color: white;
+            font-size: small;
+            float:left;
+            
+            
+    
+        }
+       .cart{
+            display: block;
+            margin: 10px;
+            padding:10px;
+            color: black;
+            left:0;
+            bottom:0;
+            
+    
+        }
+        .example{
+            float:right;
+            color:chocolate;
+        }
+
+        .text {
+      overflow: hidden;
+    text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+   font-size: 12px;
+}
+        .head
+        {
+            text-align: center;
+            position: fixed;
+            height:7%;
+            width:100%;
+            background-color:aqua;
+            margin-top: 0px;
+        }
+
+        *{
+            margin: 0px;
+        }
+
+        .head img{
+            height:32px;
+            width:70px;
+            float:right;
+            margin:2px;
+            background-color:white;
+            border-radius:25px;
+            margin-left:20px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <form class="example">
+        
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    
+<!-- <p align="left">Select category</p> -->
+<!-- <a href="/add_new_product/" class="one"> Add New product</a>
+<center> <a href="/logout">Log Out</a><center>
+<center> <a href="/profile">Profile</a><center>
+{% if cart_size %}
+<a href="/cart">Cart<mark>{{cart_size}}</mark> </a>
+{% endif %}
+
+<br><br><br> -->
+
+
+<div class="head">
+<iimg src="cart picture.jpg">
+<a href="/category?type=all" style="border:2px solid black;padding: 4px 4px; margin : 4px;color:black; border-radius:12px;background:white">All</a>
+{% for category in categoryList %}
+    <a href="/category?type={{ category.category_name }}"style="border:2px solid black;color:black; padding: 4px 8px; margin : 4px; border-radius:12px;background:white">{{ category.category_name }}</a>
+{% endfor %}
+
+<!-- <a href="/add_new_product/" > Add New product</a> -->
+<a style="border:2px solid black;color:black; padding: 4px 8px; margin : 4px; border-radius:12px;background:white" href="/logout">Log Out</a>
+{% if cart_size %}
+    <a style="border:2px solid black;color:black; padding: 4px 8px; margin : 4px; border-radius:12px;background:white" href="/cart">Cart<mark>{{cart_size}}</mark> </a>
+{% endif %}
+
+</div>
+
+<br><br>
+    {% if productList %}
+    {% for product in productList %}
+    <div  class="product">
+        <h5>{{product.product_name}}</h5>
+        <p class="text">{{product.product_description}}</p>
+        <h6>Rs. {{product.product_price}}</h6>
+       
+        <a href="/desc?id={{product.id}}">
+            <img src="{{ product.product_logo.url }}"/>
+        </a>
+        
+
+        <!-- <a class ="cart" href="/add_cart?product={{ product.product_name }}&price={{product.product_price}}">Add to Cart</a>
+        <a href="/desc?id={{product.id}}">More Info</a> -->
+        
+    </div>
+    {% endfor %}
+    {% endif %}
+</body>
+</html>

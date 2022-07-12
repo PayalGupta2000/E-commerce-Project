@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A shopping Website</title>
+    <link rel="shortcut icon" href="media/titleico.png" type="image/x-icon">
+    <script src="{% static 'main.js' %}"></script> 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        table, th, td {
+            border:1px solid black;
+          }
+
+        .but button{
+            
+            background-color:orangered;
+            color:White;
+            float:right;
+            border:none;
+            height:45px;
+            margin:10px;
+            padding:10px;
+
+        }
+
+        
+    </style>
+</head>
+<body>
+    <H1>Items in Your Cart</H1>
+    <table style="width:100%">
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+         
+    {% for item in cart_items %}
+    <tr>
+        <td>{{ item.item_name }}</td>
+        <td style="text-align: center;"><a href="/plus?item_name={{item.item_name}}" style="background:none; border :none" class="fa fa-plus"></a>
+
+        {{ item.quanitity }}
+        <a href="/minus?item_name={{item.item_name}}" style="background:none; border :none" class="fa fa-minus"></a>
+        </td>
+        
+        <td>Rs {{ item.price }}</td>
+        <td style="text-align: center;"><a href="/delete?item_name={{item.item_name}}" style="background:none; border :none" class="fa fa-trash"></a></td>
+        
+    </tr>
+
+    
+    {% endfor %}
+    <tr>
+    
+        <td colspan="3" style="text-align: right; border :none">Total: </td>
+        <td colspan="2" style="text-align: left; border :none">Rs. {{ total}}</td>
+
+    </tr>
+      </table>
+    <br><br>
+    <div class="but">
+       <a href="/purchase/" <button class="button is-primary" onclick="makepaymnet();" id="submitBtn">Purchase!</button></a>
+    
+</div>
+<script>
+function makepaymnet(){
+    console.log("Sanity check!");
+
+// Get Stripe publishable key
+    fetch("/config/")
+        .then((result) => {
+            console.log("Sanity check!");
+            return result.json(); })
+        .then((data) => {
+            console.log("Sanity check!");
+            const stripe = Stripe(data.publicKey);
+
+            console.log("Sanity check!");   
+            fetch("/create-checkout-session/")
+            .then((result) => { return result.json(); })
+            .then((data) => {
+            console.log(data);
+      // Redirect to Stripe Checkout
+      return stripe.redirectToCheckout({sessionId: data.sessionId})
+    })
+    .then((res) => {
+      console.log(res);
+    });
+    });
+}
+</script>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .one{
+        display: block;
+        width: 30%;
+        margin: 10px;
+        padding:5px 0px;
+        float: left;
+        background-color:bisque;
+        
+
+    }
+    a{
+        display: block;
+        margin: 10px;
+        padding:10px 0px;
+        color: white;
+        float: left;
+        background-color: brown;
+
+    }
+
+    h2{
+        color:teal;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    }
+
+    body{
+        background-image:url(https://i.pinimg.com/736x/a6/d5/d5/a6d5d50e7119a756be7ed0b472401633.jpg);
+    }
+
+
+
+</style>
+<body>
+    
+    
+    <center>
+    
+    {% if brandlist %}
+    {% for brand in brandlist %}
+    <div class="one">
+        <h2>{{brand.brand_name}}</h2>
+        <img src="{{ brand.brand_logo.url }}", height="100px">
+        <h2>{{brand.reg_date}}</h2>
+        
+    </div> 
+    {% endfor %}
+    {% endif %}
+   
+</center>
+
+<a href="/add_new_brand/"> Add New Brand</a>
+ 
+</body>
+</html>
